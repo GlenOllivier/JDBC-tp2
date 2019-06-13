@@ -13,8 +13,8 @@ public class Address {
     private String country;
     private Set<Contact> contacts;
 
-    public Address(int id, String number, String street, String city, String zipcode, String country) {
-        this.id = id;
+    public Address(String number, String street, String city, String zipcode, String country) {
+        this.id = 0;
         this.number = number;
         this.street = street;
         this.city = city;
@@ -25,6 +25,10 @@ public class Address {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNumber() {
@@ -104,5 +108,15 @@ public class Address {
         sb.append(", country='").append(country).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public void add(Contact c) {
+        contacts.add(c);
+        c.setAddress(this);
+    }
+
+    public void remove(Contact c) {
+        contacts.remove(c);
+        c.setAddress(null);
     }
 }

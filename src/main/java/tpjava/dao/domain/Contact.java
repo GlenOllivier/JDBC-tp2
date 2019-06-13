@@ -10,8 +10,8 @@ public class Contact {
     private String lastName;
     private Address address;
 
-    public Contact(int id, String email, String firstName, String lastName, Address address) {
-        this.id = id;
+    public Contact(String email, String firstName, String lastName, Address address) {
+        this.id = 0;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +20,10 @@ public class Contact {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -51,7 +55,15 @@ public class Contact {
     }
 
     public void setAddress(Address address) {
-        this.address = address;
+        if (this.address != null) {
+            this.address.remove(this);
+        }
+        if (!Objects.equals(address, this.address)) {
+            this.address = address;
+        }
+        if (address != null && !address.equals(this.address)) {
+            address.add(this);
+        }
     }
 
     @Override
