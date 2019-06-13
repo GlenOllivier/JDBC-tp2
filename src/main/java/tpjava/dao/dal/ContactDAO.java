@@ -23,7 +23,7 @@ public class ContactDAO {
             statement.setString(3, c.getLastName());
             Address address = c.getAddress();
             if (address != null) {
-                if (address.getId() == 0) {
+                if (address.getId() <= 0) {
                     AddressDAO adao = new AddressDAO();
                     adao.create(address);
                 }
@@ -39,10 +39,9 @@ public class ContactDAO {
         }
     }
 
-    //TODO : methods
     public void update(Contact c) throws SQLException {
 
-        if (c.getId() == 0) {
+        if (c.getId() <= 0) {
             create(c);
             return;
         }
@@ -55,7 +54,7 @@ public class ContactDAO {
             statement.setString(3, c.getLastName());
             Address address = c.getAddress();
             if (address != null) {
-                if (address.getId() == 0) {
+                if (address.getId() <= 0) {
                     AddressDAO adao = new AddressDAO();
                     adao.create(address);
                 }
@@ -72,7 +71,7 @@ public class ContactDAO {
     }
 
     public void delete(Contact c) throws SQLException {
-        if (c.getId() == 0) {
+        if (c.getId() <= 0) {
             return;
         }
 
@@ -107,7 +106,7 @@ public class ContactDAO {
             Contact c = new Contact(resultSet.getString("con_email"),
                     resultSet.getString("con_first_name"),
                     resultSet.getString("con_last_name"),
-                    null);//TODO : gerer les dependances d'adresse
+                    null);
             return c;
         }
     }

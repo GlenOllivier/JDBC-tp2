@@ -32,9 +32,8 @@ public class AddressDAO {
         }
     }
 
-    //TODO : methods
     public void update(Address a) throws SQLException {
-        if (a.getId() == 0) {
+        if (a.getId() <= 0) {
             create(a);
             return;
         }
@@ -53,7 +52,7 @@ public class AddressDAO {
     }
 
     public void delete(Address a) throws SQLException {
-        if (a.getId() == 0) {
+        if (a.getId() <= 0) {
             return;
         }
         Connection connection = PersistenceManager.getConnection();
@@ -91,7 +90,6 @@ public class AddressDAO {
             );
 
             a.setId(resultSet.getInt("add_id"));
-            //TODO : gerer les contacts liés
             return a;
         }
     }
